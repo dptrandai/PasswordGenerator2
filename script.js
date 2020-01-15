@@ -1,60 +1,61 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+//Connecting Elements to an ID in html file
+const characterAmountNumber = document.getElementById("#characterAmountNumber");
+const characterAmountRange = document.getElementById("#characterAmountRange");
+const includeUppercaseE1 = document.getElementById("#includeUppercase");
+const includeLowercaseE1 = document.getElementById("#includeLowercase");
+const includeNumbersE1 = document.getElementById("includeNumbers");
+const includeSymbolsE1 = document.getElementById("#includeSymbols");
+const passwordDisplay = document.getElementById("#passwordDisplay");
 
-//DOM Elements
-const resultE1 = document.getElementById("result");
-const lengthE1 = document.getElementById("length");
-const lowercaseE1 = document.getElementById("lower");
-const uppercaseE1 = document.getElementById("upper");
-const number1 = document.getElementById("number");
-const symbolE1 = document.getElementById("symbol");
-const generateE1 = document.getElementById("#generate");
-const clipboardE1 = document.getElementById("clipboard");
+const form = document.getElementById("#passwordGeneratorForm");
 
-const randomFunc = {
-  lower: getRandonLower,
-  upper: getrandonUpper,
-  number: getRandomNumber,
-  symbols: getRandomSymbol
-};
-// Generates event listen
-generateE1.addEventListener("click", () ==> {
-  const length = lengthE1.value,
-  const hasLower = lowercaseE1.checked;
-  const hasUpper = uppercaseE1.checked;
-  const hasNumber = numberE1.checked;
-  const hasSymbol = symbolE1.checked;
+//Connecting the arrays to the Character Codes
+const Lowercase_Char_Codes = arrayFromLowToHigh(65, 90)
+const Uppercase_Char_Codes = arrayFromLowToHigh(97, 122)
+const Numbers_Char_Codes = arrayFromLowToHigh(48, 57)
+const Symbols_Char_Codes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64)).concat(arrayFromLowToHigh(91, 96)).concat(arrayFromLowToHigh(123, 126))
 
-  resultE1.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
-});
 
-//Generates password function 
-function generatePassword(lower, upper, number, symbol, length)
-let generatePassword = "";
-const typeCount = [{lower}, {upper}, {number}, {symbol}];
+//Syncs the Range and Number to match
+characterAmountRange.addEventListener('input', syncCharacterAmount)
+characterAmountNumber.addEventListener('input', syncCharacterAmount)
 
-// Generator Functions 
+//Creates the event listeners for each selection
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  const characterAmount = characterAmountNumber.value
+  const includeLowercase = includeLowercaseE1.checked
+  const includeUppercase = includeUppercaseE1.checked
+  const includeNumbers = includeNumbersE1.checked
+  const includeSymbols = includeSymbolsE1.checked
+  const password = generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols)
+  passwordDisplay.innerText = password
+})
 
-// grabs random lower case
-function getRandonLower(){
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-// grabs random Upper Case
-function getrandonUpper(){
-  String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-//Grabs random Number
-function getRandomNumber(){
-  return String.fromCharCode(Math.floor(math.random() * 10) + 48);
+//Creates the function to generate password
+function generatePassword(characterAmount, includeLowercase, includeUppercase, includeSymbols, includeNumbers){
+  let charCodes = Lowercase_Char_Codes
+  if (includeUppercase) charCodes = charCodes.concat(Uppercase_Char_Codes)
+  if (includeNumbers) charCodes = charCodes.concat(Numbers_Char_Codes)
+  if (includeSymbols) charCodes = charCodes.concat(Symbols_Char_Codes)
+  const passwordCharacters = []
+  for (let index = 0; index < characterAmount; index++) {
+    const characterCode = charCodes[Math.floor(Math.random() * characterAmount)]
+    passwordCharacters.push(String.fromCharCode(characterCode))
+  }
+  return passwordCharacters.join("")
 }
 
-// grabs random special char
-function getRandomSymbol(){
-  const Symbols = "!@#$%^&*(){}?.<>";
-  return Symbols[Math.floor(Math.random() * Symbols.length)];
+function arrayFromLowToHigh(low, high){
+  const array = []
+  for (let i = low ; i <= high; i++) {
+    array.push(i)}
 }
-
+function syncCharacterAmount(event){
+  const value = event.target.value
+  characterAmountRange.value = value
+  characterAmountNumber.value = value
+}
 
 
 
