@@ -1,34 +1,33 @@
 //Connecting Elements to an ID in html file
-const characterAmountNumber = document.getElementById("#characterAmountNumber");
-const characterAmountRange = document.getElementById("#characterAmountRange");
-const includeUppercaseE1 = document.getElementById("#includeUppercase");
-const includeLowercaseE1 = document.getElementById("#includeLowercase");
-const includeNumbersE1 = document.getElementById("includeNumbers");
-const includeSymbolsE1 = document.getElementById("#includeSymbols");
-const passwordDisplay = document.getElementById("#passwordDisplay");
+var characterAmountNumber = document.getElementById("characterAmountNumber");
+var characterAmountRange = document.getElementById("characterAmountRange");
+var includeUppercaseE1 = document.getElementById("includeUppercase");
+var includeLowercaseE1 = document.getElementById("includeLowercase");
+var includeNumbersE1 = document.getElementById("includeNumbers");
+var includeSymbolsE1 = document.getElementById("includeSymbols");
+var passwordDisplay = document.getElementById("passwordDisplay");
 
-const form = document.getElementById("#passwordGeneratorForm");
+var form = document.getElementById("passwordGeneratorForm");
 
 //Connecting the arrays to the Character Codes
-const Lowercase_Char_Codes = arrayFromLowToHigh(65, 90)
-const Uppercase_Char_Codes = arrayFromLowToHigh(97, 122)
-const Numbers_Char_Codes = arrayFromLowToHigh(48, 57)
-const Symbols_Char_Codes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64)).concat(arrayFromLowToHigh(91, 96)).concat(arrayFromLowToHigh(123, 126))
+var Lowercase_Char_Codes = arrayFromLowToHigh(65, 90)
+var Uppercase_Char_Codes = arrayFromLowToHigh(97, 122)
+var Numbers_Char_Codes = arrayFromLowToHigh(48, 57)
+var Symbols_Char_Codes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64)).concat(arrayFromLowToHigh(91, 96)).concat(arrayFromLowToHigh(123, 126))
 
 
 //Syncs the Range and Number to match
-characterAmountRange.addEventListener('input', syncCharacterAmount)
-characterAmountNumber.addEventListener('input', syncCharacterAmount)
+characterAmountRange.addEventListener('input', syncCharacterAmount);
+characterAmountNumber.addEventListener('input', syncCharacterAmount);
 
 //Creates the event listeners for each selection
 form.addEventListener('submit', e => {
   e.preventDefault()
-  const characterAmount = characterAmountNumber.value
-  const includeLowercase = includeLowercaseE1.checked
-  const includeUppercase = includeUppercaseE1.checked
-  const includeNumbers = includeNumbersE1.checked
-  const includeSymbols = includeSymbolsE1.checked
-  const password = generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols)
+  var includeLowercase = includeLowercaseE1.checked
+  var includeUppercase = includeUppercaseE1.checked
+  var includeNumbers = includeNumbersE1.checked
+  var includeSymbols = includeSymbolsE1.checked
+  var password = generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols)
   passwordDisplay.innerText = password
 })
 
@@ -52,7 +51,7 @@ function arrayFromLowToHigh(low, high){
     array.push(i)}
 }
 function syncCharacterAmount(event){
-  const value = event.target.value
+  var value = event.target.value
   characterAmountRange.value = value
   characterAmountNumber.value = value
 }
