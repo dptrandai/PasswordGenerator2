@@ -1,12 +1,12 @@
 //Connecting Elements to an ID in html file
 var characterAmountNumber = document.getElementById("characterAmountNumber");
 var characterAmountRange = document.getElementById("characterAmountRange");
-var includeUppercaseE1 = document.getElementById("includeUppercase");
-var includeLowercaseE1 = document.getElementById("includeLowercase");
+var includeUppercaseE1 = document.getElementById("includeUpper");
+var includeLowercaseE1 = document.getElementById("includeLower");
 var includeNumbersE1 = document.getElementById("includeNumbers");
 var includeSymbolsE1 = document.getElementById("includeSymbols");
 var passwordDisplay = document.getElementById("passwordDisplay");
-
+var generateBtn = document.getElementById("generate");
 var form = document.getElementById("passwordGeneratorForm");
 
 //Connecting the arrays to the Character Codes
@@ -21,7 +21,7 @@ characterAmountRange.addEventListener('input', syncCharacterAmount);
 characterAmountNumber.addEventListener('input', syncCharacterAmount);
 
 //Creates the event listeners for each selection
-form.addEventListener('submit', e => {
+generateBtn.addEventListener('click', function(){
   e.preventDefault()
   var includeLowercase = includeLowercaseE1.checked
   var includeUppercase = includeUppercaseE1.checked
@@ -37,9 +37,9 @@ function generatePassword(characterAmount, includeLowercase, includeUppercase, i
   if (includeUppercase) charCodes = charCodes.concat(Uppercase_Char_Codes)
   if (includeNumbers) charCodes = charCodes.concat(Numbers_Char_Codes)
   if (includeSymbols) charCodes = charCodes.concat(Symbols_Char_Codes)
-  const passwordCharacters = []
+  var passwordCharacters = []
   for (let index = 0; index < characterAmount; index++) {
-    const characterCode = charCodes[Math.floor(Math.random() * characterAmount)]
+    var characterCode = charCodes[Math.floor(Math.random() * characterAmount)]
     passwordCharacters.push(String.fromCharCode(characterCode))
   }
   return passwordCharacters.join("")
@@ -49,6 +49,7 @@ function arrayFromLowToHigh(low, high){
   const array = []
   for (let i = low ; i <= high; i++) {
     array.push(i)}
+    return.array;
 }
 function syncCharacterAmount(event){
   var value = event.target.value

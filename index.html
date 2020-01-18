@@ -24,19 +24,18 @@
             aria-label="Generated Password"
           ></textarea>
         </div>
-        <form id="passwordGeneratorForm" class="form">
         <div id="options">
    
-            <label for="characterAmountNummber">Number of Characters</label>
+            <label for="characterNumber">Number of Characters</label>
             <input type="range" min="1" max="50" value="10" id="characterAmountRange">
-            <input type="number" min="1" max="50" value="10" id="characterAmountNummber"><br>
+            <input type="number" min="1" max="50" value="10" id="characterAmountNumber"><br>
             <input type="checkbox" id="includeLower">Include Lowercase<br>
             <input type="checkbox" id="includeUpper">Include Uppercase<br>
             <input type="checkbox" id="includeNumbers">Include Numbers<br>
             <input type="checkbox" id="includeSymbols">Include Symbols<br>
         </div>
         <div class="card-footer">
-          <button type="submit" id="generate" class="btn">Generate Password</button>
+          <button type="button" id="generate" class="btn">Generate Password</button>
         </div>
       </form>
       </div>
