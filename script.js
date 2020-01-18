@@ -25,6 +25,7 @@ var Uppercase_Char_Codes = arrayFromLowToHigh(97, 122);
 var Numbers_Char_Codes = arrayFromLowToHigh(48, 57);
 var Symbols_Char_Codes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64)).concat(arrayFromLowToHigh(91, 96)).concat(arrayFromLowToHigh(123, 126))
 
+// the function to return a value from charCode arrays
 function arrayFromLowToHigh(low, high){
   const array = []
   for (let i = low ; i <= high; i++) {
@@ -52,22 +53,26 @@ function generatePassword(characterAmount, includeLowercase, includeUppercase, i
   var charCodes = [];
   if (includeUppercase) {
     console.log('include uppercase', includeUppercase);
+    //Creates spread to make value of charCodes to match valu of []
     charCodes = [...charCodes, ...Uppercase_Char_Codes];
   }
   if (includeLowercase) {
     console.log('include lower', includeLowercase);
+    //Creates spread to make value of charCodes to match valu of []
     charCodes = [...charCodes, ...Lowercase_Char_Codes];
     console.log('lower case char codes', Lowercase_Char_Codes);
   }
   if (includeNumbers) {
     console.log('include numbers', includeNumbers);
+    //Creates spread to make value of charCodes to match valu of []
     charCodes = [...charCodes, ...Numbers_Char_Codes];
   }
   if (includeSymbols) {
     console.log('include symbols', includeSymbols);
+    //Creates spread to make value of charCodes to match valu of []
     charCodes = [...charCodes, ...Symbols_Char_Codes];
   }
-
+//Below will take all values that are checked and will create a PW
   var passwordCharacters = [];
   for (let index = 0; index < characterAmount; index++) {
     var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
@@ -82,18 +87,7 @@ function generatePassword(characterAmount, includeLowercase, includeUppercase, i
 
 
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
-
-  copyBtn.removeAttribute("disabled");
-  copyBtn.focus();
-}
-
-function copyToClipboard() {
   // BONUS 
 }
 
